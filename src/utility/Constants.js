@@ -1,0 +1,1 @@
+export const COUNTRY_LIST = ['India', 'United Kingdom', 'United States', 'China', 'Australia'];
