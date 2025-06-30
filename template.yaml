@@ -1,0 +1,36 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: react-journey
+  title: React Journey App
+  description: Scaffold a React app with standard pages & CI/CD
+spec:
+  owner: frontend-team
+  type: service
+
+  parameters:
+    - title: Project Details
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: App Name
+          description: Unique name for the journey app
+
+  steps:
+    - id: fetch-template
+      name: Fetch Template
+      action: fetch:template
+      input:
+        url: ./template
+        values:
+          name: ${{ parameters.name }}
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: github.com/org/${{ parameters.name }}
+        defaultBranch: main
+        repoVisibility: internal
